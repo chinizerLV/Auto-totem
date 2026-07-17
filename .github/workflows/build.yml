@@ -25,4 +25,12 @@ jobs:
       - name: Build
         run: ./gradlew build --stacktrace
 
-      - name: Locate ClickType class
+      - name: Locate ClickType class (diagnostic)
+        if: always()
+        run: find ~/.gradle -iname "*.jar" -exec sh -c 'unzip -l "$1" 2>/dev/null | grep -qi clicktype && echo "FOUND IN: $1"' _ {} \;
+
+      - name: Upload built jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: autototem-jar
+          path: build/libs/*.jar
