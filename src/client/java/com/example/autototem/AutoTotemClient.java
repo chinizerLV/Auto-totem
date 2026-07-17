@@ -64,12 +64,13 @@ public class AutoTotemClient implements ClientModInitializer {
 
     private int findTotemMenuSlot(Minecraft client) {
         var inventory = client.player.getInventory();
-        for (int i = 0; i < inventory.items.size(); i++) {
-            if (inventory.items.get(i).getItem() == Items.TOTEM_OF_UNDYING) {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            if (inventory.getItem(i).getItem() == Items.TOTEM_OF_UNDYING) {
                 return toMenuSlot(i);
             }
         }
         return -1;
+    }
     }
 
     private int toMenuSlot(int rawInventoryIndex) {
