@@ -27,7 +27,7 @@ jobs:
 
       - name: Locate ClickType class (diagnostic)
         if: always()
-        run: find ~/.gradle -iname "*.jar" -exec sh -c 'unzip -l "$1" 2>/dev/null | grep -qi clicktype && echo FOUND_IN $1' _ {} \;
+        run: find ~/.gradle -iname "*.jar" -exec sh -c 'unzip -l "$1" 2>/dev/null | grep -i click | sed "s|^|$1 -- |"' _ {} \;
 
       - name: Upload built jar
         uses: actions/upload-artifact@v4
