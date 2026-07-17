@@ -1,7 +1,7 @@
 # AutoTotem — Fabric Mod (Minecraft 26.2)
 
 Automatically swaps a **Totem of Undying** into your offhand whenever
-it's empty — after a **randomised delay**, not an instant robotic
+it's empty — after a **RANDOMISED DELAY**, not an instant robotic
 reaction. Press **`\`** (backslash) anytime to toggle it on/off — a chat
 message confirms the state.
 
