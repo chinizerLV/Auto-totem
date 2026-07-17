@@ -31,16 +31,13 @@ jobs:
           mkdir -p /tmp/mcextract
           cd /tmp/mcextract
           JARFILE=$(find ~/.gradle/caches/fabric-loom/26.2 -iname "minecraft-client.jar" | head -1)
-          unzip -o -q "$JARFILE" "net/minecraft/client/multiplayer/MultiPlayerGameMode.class" -d /tmp/mcextract || true
-          unzip -o -q "$JARFILE" "net/minecraft/world/inventory/ClickAction.class" -d /tmp/mcextract || true
-          unzip -o -q "$JARFILE" "net/minecraft/network/protocol/game/ServerboundContainerClickPacket*.class" -d /tmp/mcextract || true
+          unzip -o -q "$JARFILE" "net/minecraft/world/inventory/ContainerInput*.class" -d /tmp/mcextract || true
           find /tmp/mcextract -name "*.class"
-          echo "=== MultiPlayerGameMode methods ==="
-          javap -p /tmp/mcextract/net/minecraft/client/multiplayer/MultiPlayerGameMode.class || true
-          echo "=== ClickAction ==="
-          javap -p /tmp/mcextract/net/minecraft/world/inventory/ClickAction.class || true
-          echo "=== ServerboundContainerClickPacket ==="
-          javap -p /tmp/mcextract/net/minecraft/network/protocol/game/ServerboundContainerClickPacket.class || true
+          echo "=== ContainerInput ==="
+          for f in /tmp/mcextract/net/minecraft/world/inventory/ContainerInput*.class; do
+            echo "--- $f ---"
+            javap -p "$f" || true
+          done
 
       - name: Upload built jar
         uses: actions/upload-artifact@v4
