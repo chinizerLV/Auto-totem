@@ -71,7 +71,6 @@ public class AutoTotemClient implements ClientModInitializer {
         }
         return -1;
     }
-    }
 
     private int toMenuSlot(int rawInventoryIndex) {
         if (rawInventoryIndex < 9) {
