@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
@@ -57,7 +58,7 @@ public class AutoTotemClient implements ClientModInitializer {
 
         int totemMenuSlot = findTotemMenuSlot(client);
         if (totemMenuSlot != -1) {
-            // TODO: re-enable once we find the correct ClickType location
+            client.gameMode.handleContainerInput(0, totemMenuSlot, 40, ContainerInput.SWAP, client.player);
         }
         pendingSwapDelay = -1;
     }
