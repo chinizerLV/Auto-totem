@@ -25,9 +25,22 @@ jobs:
       - name: Build
         run: ./gradlew build --stacktrace
 
-      - name: Locate ClickType class (diagnostic)
+      - name: Dump inventory click API (diagnostic)
         if: always()
-        run: find ~/.gradle -iname "*.jar" -exec sh -c 'unzip -l "$1" 2>/dev/null | grep -i click | sed "s|^|$1 -- |"' _ {} \;
+        run: |
+          mkdir -p /tmp/mcextract
+          cd /tmp/mcextract
+          JARFILE=$(find ~/.gradle/caches/fabric-loom/26.2 -iname "minecraft-client.jar" | head -1)
+          unzip -o -q "$JARFILE" "net/minecraft/client/multiplayer/MultiPlayerGameMode.class" -d /tmp/mcextract || true
+          unzip -o -q "$JARFILE" "net/minecraft/world/inventory/ClickAction.class" -d /tmp/mcextract || true
+          unzip -o -q "$JARFILE" "net/minecraft/network/protocol/game/ServerboundContainerClickPacket*.class" -d /tmp/mcextract || true
+          find /tmp/mcextract -name "*.class"
+          echo "=== MultiPlayerGameMode methods ==="
+          javap -p /tmp/mcextract/net/minecraft/client/multiplayer/MultiPlayerGameMode.class || true
+          echo "=== ClickAction ==="
+          javap -p /tmp/mcextract/net/minecraft/world/inventory/ClickAction.class || true
+          echo "=== ServerboundContainerClickPacket ==="
+          javap -p /tmp/mcextract/net/minecraft/network/protocol/game/ServerboundContainerClickPacket.class || true
 
       - name: Upload built jar
         uses: actions/upload-artifact@v4
