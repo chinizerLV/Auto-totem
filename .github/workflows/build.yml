@@ -19,11 +19,19 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew || true
 
-      - name: Generate Gradle wrapper
+      - name: Generate Gradle wrapper (if missing)
         run: gradle wrapper --gradle-version 9.5.1 || true
 
       - name: Build
         run: ./gradlew build --stacktrace
+
+      - name: Locate ClickType class (diagnostic)
+        if: always()
+        run: |
+          echo "Searching for ClickType.class in Gradle caches..."
+          find ~/.gradle -iname "ClickType.class" 2>/dev/null || echo "not found as ClickType"
+          echo "Searching for any inventory click-related classes..."
+          find ~/.gradle -ipath "*inventory*click*" -iname "*.class" 2>/dev/null | head -50 || true
 
       - name: Upload built jar
         uses: actions/upload-artifact@v4
