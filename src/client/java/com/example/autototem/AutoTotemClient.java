@@ -14,7 +14,7 @@ import java.util.Random;
 public class AutoTotemClient implements ClientModInitializer {
 
     private static final int MIN_DELAY_TICKS = 2;
-    private static final int MAX_DELAY_TICKS = 10;
+    private static final int MAX_DELAY_TICKS = 8;
 
     private boolean enabled = true;
     private boolean lastToggleKeyState = false;
