@@ -12,7 +12,7 @@ with Java 25 and Minecraft's official (unobfuscated) mappings.
 
 Every client tick, the mod checks your offhand slot. The moment it's not
 holding a Totem of Undying (e.g. you just used one, or never had one
-equipped), it rolls a random delay — somewhere between 2 and 10 ticks
+equipped), it rolls a random delay — somewhere between 2 and 8 ticks
 (0.1–0.5 seconds) — before pulling a totem from your inventory into the
 offhand slot. It does this using the exact same click type the game
 itself uses for the vanilla "swap to offhand" hotkey (F), so it's not
