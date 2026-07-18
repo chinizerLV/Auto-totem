@@ -2,7 +2,7 @@
 
 Automatically swaps a **Totem of Undying** into your offhand whenever
 it's empty — after a **RANDOMISED DELAY**, not an instant robotic
-reaction. Press **`\`** (backslash) anytime to toggle it on/off — a chat
+reaction. Press **`NUM_PAD_2`** anytime to toggle it on/off — a chat
 message confirms the state.
 
 Built for **Minecraft 26.2**, using **Fabric Loader** + **Fabric API**,
@@ -69,7 +69,7 @@ autototemmod/
   works). No setup needed beyond that.
 - Whenever your offhand totem is used or missing, it'll automatically
   restock after the randomised delay.
-- Press `\` to toggle on/off.
+- Press `NUM_PAD_2` to toggle on/off.
 
 ## Tuning the delay
 
@@ -77,7 +77,7 @@ In `AutoTotemClient.java`:
 
 ```java
 private static final int MIN_DELAY_TICKS = 2;
-private static final int MAX_DELAY_TICKS = 10;
+private static final int MAX_DELAY_TICKS = 8;
 ```
 
 Both values are in ticks (20 ticks = 1 second). Widen or shift this
@@ -89,5 +89,5 @@ Actions build to go green, download the new jar, and swap it into your
 
 ## Toggle key
 
-`\` (backslash) is hardcoded in `handleToggleKey()`. To use a different
-key, swap `GLFW.GLFW_KEY_BACKSLASH` for any other `GLFW_KEY_*` constant.
+NUM_PAD_2 is hardcoded in `handleToggleKey()`. To use a different
+key, swap `GLFW.GLFW_KEY_KP_2` for any other `GLFW_KEY_*` constant.
