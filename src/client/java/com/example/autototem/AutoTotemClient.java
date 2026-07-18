@@ -82,7 +82,7 @@ public class AutoTotemClient implements ClientModInitializer {
 
     private void handleToggleKey(Minecraft client) {
         long windowHandle = GLFW.glfwGetCurrentContext();
-        boolean toggleKeyDown = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_BACKSLASH) == GLFW.GLFW_PRESS;
+        boolean toggleKeyDown = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_KP_2) == GLFW.GLFW_PRESS;
 
         if (toggleKeyDown && !lastToggleKeyState) {
             enabled = !enabled;
