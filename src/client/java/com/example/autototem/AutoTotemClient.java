@@ -9,17 +9,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.Random;
-
 public class AutoTotemClient implements ClientModInitializer {
 
-    private static final int MIN_DELAY_TICKS = 2;
-    private static final int MAX_DELAY_TICKS = 8;
+    // Fixed delay, in ticks (20 ticks = 1 second), before swapping in a new totem.
+    private static final int DELAY_TICKS = 5;
 
     private boolean enabled = true;
     private boolean lastToggleKeyState = false;
     private int pendingSwapDelay = -1;
-    private final Random random = new Random();
 
     @Override
     public void onInitializeClient() {
@@ -47,7 +44,7 @@ public class AutoTotemClient implements ClientModInitializer {
         }
 
         if (pendingSwapDelay == -1) {
-            pendingSwapDelay = MIN_DELAY_TICKS + random.nextInt(MAX_DELAY_TICKS - MIN_DELAY_TICKS + 1);
+            pendingSwapDelay = DELAY_TICKS;
             return;
         }
 
@@ -82,7 +79,7 @@ public class AutoTotemClient implements ClientModInitializer {
 
     private void handleToggleKey(Minecraft client) {
         long windowHandle = GLFW.glfwGetCurrentContext();
-        boolean toggleKeyDown = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_KP_2) == GLFW.GLFW_PRESS;
+        boolean toggleKeyDown = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_BACKSLASH) == GLFW.GLFW_PRESS;
 
         if (toggleKeyDown && !lastToggleKeyState) {
             enabled = !enabled;
